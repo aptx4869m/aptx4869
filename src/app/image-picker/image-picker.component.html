@@ -1,0 +1,8 @@
+<div class="image-picker">
+  <img [src]="image" *ngIf="image" class="preview-image"/>
+</div>
+<div *ngIf="editable">
+  <md-input-container>
+    <input md-input [(ngModel)]="image" placeholder="Image" (blur)="updateImage()" required>
+  </md-input-container>
+</div>

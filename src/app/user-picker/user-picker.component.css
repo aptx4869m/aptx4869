@@ -1,0 +1,17 @@
+img.avatar {
+  weight: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.display-user {
+  display: inline-block;
+  text-overflow: ellipsis;
+  width: 100px;
+}
+
+.user-picker {
+  display: inline-flex;
+  align-items: center;
+}

@@ -1,0 +1,15 @@
+.group-item-line img {
+  width: 60px;
+}
+
+.pending {
+  background-color: #E5B181;
+}
+
+.confirmed {
+  background-color: #DAEDBD;
+}
+
+.needs-action {
+  background-color: #F4B9B2;
+}

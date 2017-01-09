@@ -1,0 +1,23 @@
+<div *ngIf="!(af.auth | async)">
+  <div>
+    <md-input-container>
+      <input md-input placeholder="Email" [(ngModel)]="email" required (blur)="validateForm()"/> 
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input md-input placeholder="Password" [(ngModel)]="password" required (blur)="validateForm()" type="password"/>
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input md-input required
+        [(ngModel)]="displayName" 
+        placeholder="Name" (blur)="validateForm()"/>
+    </md-input-container>
+  </div>
+  <app-image-picker [(image)]="photoURL" required (imageChange)="validateForm()"></app-image-picker>
+  <div *ngIf="valid">
+    <button md-button (click)="register()" type="submit">Register</button>
+  </div>
+</div>

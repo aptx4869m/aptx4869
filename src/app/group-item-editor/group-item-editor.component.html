@@ -1,0 +1,97 @@
+    <div *ngFor="let item of items | async">
+      <div class="group-item-line">
+        {{item.name}} 
+        <img [src]="item.image" *ngIf="item.image">
+        <a [href]="item.link" *ngIf="item.link"> Link </a>
+        <span *ngIf="item.priceJPY"> {{item.priceJPY}} JPY </span>
+        <span *ngIf="item.priceJPY"> {{item.priceCNY}} CNY </span>
+        <span *ngIf="item.weight"> {{item.weight}} g </span>
+        <md-icon (click)="read(item.$key)" *ngIf="editable">mode_edit</md-icon>
+        <md-icon (click)="delete(item.$key)" *ngIf="editable">delete</md-icon>
+        <md-input-container *ngIf="editable">
+          <input md-input
+              placeholder="Stock" 
+              type="number"
+              (ngModelChange)="setStock(item.$key, $event)"
+              [ngModel]="item.stock">
+        </md-input-container>
+      </div>
+      <div class="group-item-status" *ngIf="editable && !editProposal">
+        <div *ngFor="let user of groupUsers">
+          <div *ngIf="proposals[user][item.$key]" [class]="proposalTypes[user][item.$key]">
+            <app-user-picker [value]="user" [editable]="false">
+            </app-user-picker>
+            {{proposals[user][item.$key]}} 
+            <md-icon *ngIf="proposalTypes[user][item.$key] == 'confirmed'">
+              check_circle
+            </md-icon>
+            <span *ngIf="proposalTypes[user][item.$key] == 'pending'">
+              Pending
+            </span>
+            <span *ngIf="proposalTypes[user][item.$key] == 'needs-action'">
+              <md-icon>
+                add_alert
+              </md-icon>
+              <a md-button (click)="setProposal(item.$key, proposals[user][item.$key], user)">
+                Approve
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="group-item-status" *ngIf="editable && editProposal">
+        <md-input-container *ngFor="let user of groupUsers">
+          <input md-input
+            [class]="proposalTypes[user][item.$key]"
+            type="number"
+            (ngModelChange)="setProposal(item.$key, $event, user)"
+            [ngModel]="proposals[user][item.$key]" 
+            [placeholder]="displayNames[user]">
+        </md-input-container>
+      </div>
+      <div class="group-item-status" *ngIf="!editable">
+        <md-input-container>
+          <input md-input
+            [class]="proposalTypes[currentUser][item.$key]"
+            type="number"
+            (ngModelChange)="setProposal(item.$key, $event)"
+            [ngModel]="proposals[currentUser][item.$key]" 
+            [placeholder]="displayNames[currentUser]">
+        </md-input-container>
+      </div>
+    </div>
+  <div *ngIf="editable">
+    <a (click)="editProposal = false" md-button *ngIf="editProposal">Done</a>
+    <a (click)="editProposal = true" md-button *ngIf="!editProposal">Edit proposals</a>
+    <a md-button (click)="addNewItem()"> Add new item </a>
+    <app-user-picker [(value)]="newUser"></app-user-picker>
+    <a md-button (click)="addNewUser()"> Add new user </a>
+  </div>
+  <div *ngIf="groupItem">
+  <md-input-container>
+    <input md-input placeholder="Name" [(ngModel)]="groupItem.name" required>
+  </md-input-container>
+  <md-input-container>
+    <input md-input placeholder="Image" [(ngModel)]="groupItem.image">
+  </md-input-container>
+  <md-input-container>
+    <input md-input placeholder="Link" [(ngModel)]="groupItem.link">
+  </md-input-container>
+  <md-input-container>
+    <input md-input placeholder="Price(JPY)" [(ngModel)]="groupItem.priceJPY">
+  </md-input-container>
+  <md-input-container>
+    <input md-input placeholder="Price(CNY)" [(ngModel)]="groupItem.priceCNY">
+  </md-input-container>
+  <md-input-container>
+    <input md-input placeholder="Additional Fee(JPY)" [(ngModel)]="groupItem.additionalJPY">
+  </md-input-container>
+  <md-input-container>
+    <input md-input placeholder="Additional Fee(CNY)" [(ngModel)]="groupItem.additionalCNY">
+  </md-input-container>
+  <md-input-container>
+    <input md-input placeholder="Weight" [(ngModel)]="groupItem.weight">
+  </md-input-container>
+  <button md-button (click)="save()"> Save </button>
+  <button md-button (click)="groupItem = null">Close</button>
+  </div>

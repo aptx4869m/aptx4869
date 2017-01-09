@@ -1,0 +1,20 @@
+<div class="nav-bar" *ngIf="(af.auth | async)"> 
+  <a md-button class="display-name" [disabled]="true">{{ (af.auth|async).auth.displayName }} </a>
+  <img [src]="(af.auth|async).auth.photoURL" 
+       [alt]="(af.auth|async).auth.displayName" 
+       *ngIf="(af.auth|async).auth.photoURL" class="avatar"> 
+  <md-icon (click)="logout()">exit_to_app</md-icon>
+  <md-icon routerLink="/group-list" *ngIf="(af.auth|async).auth.displayName && (af.auth|async).auth.photoURL">assignment</md-icon>
+  <md-icon routerLink="/profile">account_box</md-icon>
+</div>
+
+<div *ngIf="!(af.auth | async)">
+  <md-input-container>
+    <input md-input placeholder="Email" [(ngModel)]="email"/> 
+  </md-input-container>
+  <md-input-container>
+    <input md-input placeholder="Password" [(ngModel)]="password" type="password"/>
+  </md-input-container>
+  <span *ngIf="error">{{error}}</span>
+  <a md-button (click)="login()">Login</a>
+</div>

@@ -1,0 +1,11 @@
+<div class="tags-editor">
+  <md-chip-list>
+    <md-chip *ngFor="let tag of tags">
+      {{tag}}
+      <md-icon (click)="removeTag(tag)" *ngIf="editable">clear</md-icon>
+    </md-chip>
+  </md-chip-list>
+</div>
+<md-input-container *ngIf="editable">
+  <input md-input #input (keyup.enter)="addTag(input.value)" placeholder="New Tag..."/>
+</md-input-container>

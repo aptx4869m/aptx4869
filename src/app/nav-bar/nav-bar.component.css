@@ -1,0 +1,14 @@
+img.avatar {
+  weight: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  justify-content: center
+}
+

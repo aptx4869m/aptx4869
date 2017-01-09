@@ -1,0 +1,9 @@
+<md-card *ngIf="(af.auth|async)">
+  <md-input-container>
+    <input md-input 
+      [(ngModel)]="name" 
+      placeholder="Name" 
+      (blur)="updateProfile()" />
+  </md-input-container>
+  <app-image-picker [image]="avatar" (imageChange)="avatar=$event; updateProfile()"></app-image-picker>
+</md-card>

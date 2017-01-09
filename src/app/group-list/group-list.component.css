@@ -1,0 +1,13 @@
+.group-card {
+  width: 300px;
+  margin: 16px;
+}
+
+.create-group {
+}
+
+.group-cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}

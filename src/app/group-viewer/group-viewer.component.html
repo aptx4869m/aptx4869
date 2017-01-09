@@ -1,0 +1,21 @@
+<md-card>
+  group-viewer works!
+  Name: {{group.name}} <br>
+  Description: {{group.description}}
+  <img src="{{group.image}}">
+  <a [href]="group.link" *ngIf="group.link">Link</a>
+  Receiver: {{group.receiver}}
+  Owner: {{group.owner}}
+  <span *ngIf="group.shippingFee">
+    Shipping Fee (CNY): {{group.shippingFee}}
+  </span>
+  <span *ngIf="group.weight">
+    Weight (g): {{group.weight}}
+  </span>
+  <app-group-item-editor [group]="group.$key"></app-group-item-editor>
+  <app-tags-editor [tags]="group.tags" [editable]="false"></app-tags-editor>
+  <button md-button (click)="save()">Save</button>
+
+  <button md-button>Use as template</button> // start a new group
+  <button md-button>Join group</button>  // join group if not joint
+</md-card>

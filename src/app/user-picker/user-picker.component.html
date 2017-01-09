@@ -1,0 +1,13 @@
+<div class="user-picker">
+  <md-select placeholder="Select User" [(ngModel)]="selected" *ngIf="editable">
+    <md-option *ngFor="let user of (users | async)" [value]="user.$key">
+      {{ user.displayName }}
+    </md-option>
+  </md-select>
+  <img [src]="photoURL" 
+       [alt]="displayName" 
+       *ngIf="photoURL" class="avatar"> 
+  <div class="display-user">
+    {{displayName}}
+  </div>
+</div>

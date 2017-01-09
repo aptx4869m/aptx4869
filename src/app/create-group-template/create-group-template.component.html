@@ -1,0 +1,32 @@
+<md-card>
+  create-group-template works!
+  Key: {{key}}
+
+  <ul>
+    <li *ngFor="let item of groupTemplates | async">
+      {{item.$key}}
+      <button (click)="read(item.$key)">Get</button>
+    </li>
+  </ul>
+  <md-input-container>
+    <input md-input #newKey placeholder="Key">
+  </md-input-container>
+  <button md-button (click)="read(key)">Retrive data</button>
+  <div *ngIf="template">
+  <md-input-container>
+    <input md-input [(ngModel)]="template.name" placeholder="Name">
+  </md-input-container>
+  <md-input-container>
+    <input md-input [(ngModel)]="template.image" placeholder="Image">
+  </md-input-container>
+  <md-input-container>
+    <input md-input [(ngModel)]="template.link" placeholder="Link">
+  </md-input-container>
+  <span *ngFor="let tag of template.tags">{{tag}}</span>
+  <md-input-container>
+    <input md-input placeholder="Tag" #newTag>
+  </md-input-container>
+  <button md-button (click)="addTag(newTag.value)">Add tag</button>
+  <button md-button (click)="save()">Save</button>
+  </div>
+</md-card>

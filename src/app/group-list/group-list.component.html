@@ -1,0 +1,32 @@
+<div class="group-cards">
+<md-card class="group-card" *ngFor="let group of groups | async" routerLink="/group/{{group.$key}}">
+  <img [src]="group.image" [alt]="group.name" md-card-image />
+  <md-card-title>
+    {{group.name}} 
+  </md-card-title>
+  <md-card-content> 
+    <app-user-picker [value]="group.owner" [editable]="false">
+    </app-user-picker>
+      <div>{{group.description}}</div>
+      <div>Tags: <span *ngFor="let tag of group.tags">{{tag}} </span></div>
+  </md-card-content>
+  <md-card-actions>
+    <a md-button [href]="group.link" target="_blank" *ngIf="group.link">Link</a>
+    <a md-button routerLink="/group/{{group.$key}}">Update</a>
+  </md-card-actions>
+</md-card>
+</div>
+<a md-fab (click)="showCreateGroup = true" color="primary" class="create-group">
+  <md-icon>add</md-icon>
+</a>
+<md-card class="group-card" *ngIf="showCreateGroup">
+  <app-image-picker [(image)]="newGroupImage"></app-image-picker>
+  <md-card-title>
+    <md-input-container>
+      <input md-input [(ngModel)]="newGroupName">
+    </md-input-container>
+  </md-card-title>
+  <md-card-actions>
+    <a md-button (click)="addGroup()" [disabled]="!newGroupImage || !newGroupName">Create</a>
+  </md-card-actions>
+</md-card>

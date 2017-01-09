@@ -1,0 +1,61 @@
+<md-card class="group-editor">
+  <md-card-title>
+    <md-input-container *ngIf="editable">
+      <input md-input [(ngModel)]="group.name" placeholder="Name" (blur)="updateGroupName()" required>
+    </md-input-container>
+    <span *ngIf="!editable">{{group.name}}</span>
+  </md-card-title>
+  <md-card-content>
+    <app-image-picker 
+        [image]="group.image" 
+        [editable]="editable"
+        (imageChange)="updateGroupImage($event)"></app-image-picker>
+    <div class="section">
+      <a [href]="group.link" *ngIf="group.link" target="_blank">Link</a>
+      <md-input-container *ngIf="editable">
+        <input md-input [(ngModel)]="group.link" placeholder="Link" (blur)="updateGroupLink()">
+      </md-input-container>
+    </div>
+    <div>
+      Owner:
+      <app-user-picker 
+        [editable]="false"
+        [value]="group.owner"> 
+      </app-user-picker>
+    </div>
+    <div>
+      Receiver: 
+      <app-user-picker 
+        [editable]="editable"
+        [value]="group.receiver" 
+        (valueChange)="updateGroupReceiver($event)"></app-user-picker>
+    </div>
+    <div>
+      <md-input-container class="description" *ngIf="editable">
+        <textarea md-input rows="4" [(ngModel)]="group.description" placeholder="Description" (blur)="updateGroupDescription()">
+        </textarea>
+      </md-input-container>
+      <p *ngIf="!editable">{{group.description}}</p>
+    </div>
+    <app-tags-editor 
+      [tags]="group.tags" 
+      [editable]="editable" 
+      (tagsChange)="updateGroupTags($event)">
+    </app-tags-editor>
+    <app-group-item-editor 
+      [group]="group.$key"
+      [editable]="editable">
+    </app-group-item-editor>
+<!--  <md-input-container>
+    <input md-input [(ngModel)]="group.shippingFee" placeholder="Total Shipping Fee (CNY)">
+  </md-input-container>
+  <md-input-container>
+    <input md-input [(ngModel)]="group.weight" placeholder="Total Weight (g)">
+  </md-input-container>
+  <button md-button (click)="save()">Save</button>
+-->
+  </md-card-content>
+  <md-card-actions *ngIf="editable">
+    <a md-button (click)="delete()">Delete</a>
+  </md-card-actions>
+</md-card>

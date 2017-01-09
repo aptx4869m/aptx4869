@@ -1,0 +1,16 @@
+.group-editor {
+  max-width: 599px;
+}
+
+.preview-image {
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  width: 100%;
+}
